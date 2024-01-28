@@ -1,46 +1,83 @@
 import 'package:flutter/material.dart';
+import '../pages/HomePage.dart';
+import '../pages/Page2.dart';
+import '../pages/Page3.dart';
+import '../FoodMenu.dart';
 
-class NavTab extends StatelessWidget {
-  final String tabName;
-  final bool selected;
+class NavTab extends StatefulWidget {
 
   const NavTab({
-    Key? key,
-    required this.tabName,
-    this.selected = false,
-  }): super(key: key);
+    super.key,
+  });
+
+  @override
+  State<NavTab> createState() => _NavTabState();
+}
+
+
+class _NavTabState extends State<NavTab> {
+
+  int indexTab = 0;
+  FoodMenu initFood = const FoodMenu(
+    foodName: 'fried_chicken', 
+    foodDescription: 'a dish consisting of chicken pieces that have been coated with seasoned flour or batter and pan-fried, deep fried, pressure fried, or air fried',
+    foodImage: 'fried_chicken.jpg',
+    foodCost: 15
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.only(right: 5, left: 5),
-        child: ButtonBar(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: selected? 
-                const Border(
-                  bottom: BorderSide(color: Colors.white, width: 3),
-                ): const Border(
-                  bottom: BorderSide(color: Colors.transparent, width: 3),
-                ),
-              ),
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  ),
-                ),
-                child: Text(tabName,
-                  overflow: TextOverflow.ellipsis,
-                ),
+
+    List<Widget> pages = [
+      HomePage(
+        onChangePage: (index, currFood) => setState(() {
+          initFood = currFood;
+          indexTab = index;
+        }) 
+      ),
+
+      Page2(
+        foodMenu: initFood
+      ),
+
+      Page3(
+        foodMenu: initFood
+      ),
+    ];
+
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+        
+          title: const Center(
+            child: Text('Food Menu',
+              style: TextStyle(
+                color: Colors.white
               ),
             ),
+          ),
+          backgroundColor: Colors.blueGrey,
+  
+        ),
+        body: Center(
+          child: pages[indexTab],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.food_bank_sharp), label: 'home'),
+              BottomNavigationBarItem(icon: Icon(Icons.details), label: 'detail'),
+              BottomNavigationBarItem(icon: Icon(Icons.details), label: 'wip'),
+            
           ],
-        )
+          onTap: (value) => setState(() {
+              indexTab = value;
+            }),
+          currentIndex: indexTab,
+        ),
+      ),
       ),
     );
   }
