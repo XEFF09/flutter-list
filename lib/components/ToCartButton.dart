@@ -15,20 +15,20 @@ class ToCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-                        onPressed: () => {
-                          context.read<CounterModel>().increment(),
-                          context.read<CounterModel>().addFood(foodMenu),
-                        },
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
-                          minimumSize: const Size(250, 0),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                          ),
-                        ),
-                        child: const Text('ADD TO CART +'),
-                      );
+      onPressed: () => {
+        context.read<CounterModel>().increment(),
+        context.read<CounterModel>().addFood(foodMenu),
+      },
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        minimumSize: const Size(250, 0),
+        shape: const RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.all(Radius.circular(6.0)),
+        ),
+      ),
+      child: const Text('ADD TO CART +'),
+    );
   }
 }

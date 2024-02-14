@@ -56,9 +56,7 @@ class FoodCardLg extends StatelessWidget {
                   child: InkWell(
                     onTap: () => {
                       context.read<CounterModel>().increment(),
-                      context.read<CounterModel>().selectedFood.add(
-                        foodMenu,
-                      )
+                      context.read<CounterModel>().addFood(foodMenu),
                     },
                     child: const SizedBox(
                       width: 40,

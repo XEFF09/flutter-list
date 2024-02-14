@@ -18,7 +18,7 @@ class NavTab extends StatefulWidget {
 
 class _NavTabState extends State<NavTab> {
   int indexTab = 0;
-  FoodMenu initFood = const FoodMenu(
+  FoodMenu initFood = FoodMenu(
       foodName: 'fried_chicken',
       foodDescription:
           'a dish consisting of chicken pieces that have been coated with seasoned flour or batter and pan-fried, deep fried, pressure fried, or air fried',

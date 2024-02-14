@@ -24,10 +24,25 @@ class Page3 extends StatelessWidget {
                 return Column(
                   children: model.selectedFood
                       .map((food) => ListTile(
-                            title: Text(food.foodName),
-                            subtitle: Text(food.foodDescription),
-                            trailing: Text('\$${food.foodCost}'),
-                          ))
+                          title: Text(food.foodName),
+                          subtitle: Text(food.foodDescription),
+                          trailing: Column(
+                            children: [
+                              Text('Cost: ${food.foodCost}'),
+                              Text('Quantity: ${food.quantity}'),
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () {
+                                    context
+                                        .read<CounterModel>()
+                                        .removeFood(food);
+                                    context.read<CounterModel>().decrement();
+                                  },
+                                  child: const Icon(Icons.delete),
+                                ),
+                              )
+                            ],
+                          )))
                       .toList(),
                 );
               },

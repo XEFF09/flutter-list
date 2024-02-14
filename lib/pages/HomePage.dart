@@ -16,14 +16,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    const FoodMenu mainFood = FoodMenu(
+    FoodMenu mainFood = FoodMenu(
       foodName: 'fried_chicken', 
       foodDescription: 'a dish consisting of chicken pieces that have been coated with seasoned flour or batter and pan-fried, deep fried, pressure fried, or air fried',
       foodImage: 'fried_chicken.jpg',
       foodCost: 15
     );
 
-    const FoodMenu subFood = FoodMenu(
+    FoodMenu subFood = FoodMenu(
       foodName: 'somtum', 
       foodDescription: "a Thai papaya salad. Don't confuse Thai salads with the boring leafy salads the rest of the world enjoys.",
       foodImage: 'somtum.jpg',

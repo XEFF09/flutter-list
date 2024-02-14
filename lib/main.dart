@@ -15,7 +15,29 @@ class CounterModel with ChangeNotifier {
   }
 
   void addFood(FoodMenu food) {
+    for (var item in selectedFood) {
+      if (item.foodName == food.foodName) {
+        item.quantity += 1;
+        return;
+      }
+    }
     selectedFood.add(food);
+    notifyListeners();
+  }
+
+  void removeFood(FoodMenu food) {
+    food.quantity -= 1;
+    if (food.quantity == 0) {
+      selectedFood.remove(food);
+    }
+    notifyListeners();
+  }
+
+  void decrement() {
+    _count--;
+    if (_count < 0) {
+      _count = 0;
+    }
     notifyListeners();
   }
 }
@@ -25,7 +47,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +68,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: const NavTab());
+    return Container(
+      child: const NavTab(),
+    );
   }
 }
