@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:week3/main.dart';
 import '../FoodMenu.dart';
 
-class FoodCardLg extends StatelessWidget {
+import 'package:provider/provider.dart';
 
+class FoodCardLg extends StatelessWidget {
   final FoodMenu foodMenu;
   final Function(int index, FoodMenu currFood) onChangePage;
 
-  const FoodCardLg({
-    super.key, 
-    required this.foodMenu,
-    required this.onChangePage
-  });
+  const FoodCardLg(
+      {super.key, required this.foodMenu, required this.onChangePage});
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +54,18 @@ class FoodCardLg extends StatelessWidget {
                 child: Material(
                   color: Colors.white,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () => {
+                      context.read<CounterModel>().increment(),
+                      context.read<CounterModel>().selectedFood.add(
+                        foodMenu,
+                      )
+                    },
                     child: const SizedBox(
                       width: 40,
                       height: 40,
                       child: Center(
-                        child: Text('+',
+                        child: Text(
+                          '+',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,

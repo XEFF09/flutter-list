@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:week3/FoodMenu.dart';
 
+import 'package:week3/components/ToCartButton.dart';
+
 class FoodCardSm extends StatelessWidget {
 
   final FoodMenu foodMenu;
@@ -58,19 +60,7 @@ class FoodCardSm extends StatelessWidget {
                 Expanded(
                   child: ButtonBar(
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
-                          minimumSize: const Size(250, 0),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(6.0)),
-                          ),
-                        ),
-                        child: const Text('ADD TO CART +'),
-                      ),
+                      ToCartButton(foodMenu: foodMenu)
                     ],
                   ),
                 )
